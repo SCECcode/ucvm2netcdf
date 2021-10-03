@@ -40,13 +40,17 @@ but any updated input material properties files, may require the user to update 
   - make_cvms5_depth_nc.py
   - make_cvms4_depth_nc.py
 
-## make_netcdf_test_script.py
-A preliminary netcdf script that that worked at one point without full metadata
+## Prototype development
+This contains a preliminary netcdf script that that worked at one point without full metadata. While developing the netCDF file
+for IRIS, we used netCDF format checking programs to ensure we were creating valid netCDF format and metadata. Our scripts use a 
+netCDF python interface. We also tested a netCDF creation program from IRIS that converts a CSV format volume and
+a text metadata format to create a netCDF format.
+- make_netcdf_test_script.py
+
 
 ## Example Processing stages Using Docker
 - Edit generateGridPts_depth.py to set n pts in each dimenion define the output file (e.g. cvm4_depth_file.txt)
 - run generateGridPts_depth.py
-- Used ucvm in docker to extract vp,vs, rho
-- Start UCVM in Docker:
-- Make sure Docker daemon is running
-- docker run --rm -it --mount type=bind,source="$(pwd)"/target,destination=/app/target  sceccode/miniucvm:1.1
+- Used Docker version of ucvm extract vp,vs, rho and write ucvm output file
+- run make_xxx_xxx_nc.py script to create output netCDF file. The output file name is the input file name, with a modified extension changed to .nc
+- Use IDV viz tool to read in netCDF file and visualize the model coverage region, volume, and material properties
