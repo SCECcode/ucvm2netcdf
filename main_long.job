@@ -1,0 +1,16 @@
+#!/bin/bash
+#SBATCH --job-name="main_long_netcdf"
+#SBATCH --output="main_long_netcdf.%j.%N.out"  
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=32GB
+#SBATCH --time=12:00:00
+#SBATCH --account=scec_608
+#SBATCH --partition=main
+#SBATCH --chdir=/project/scec_608/maechlin/netcdf/ucvm2netcdf
+#SBATCH --mail-type=BEGIN,END
+#SBATCH --mail-user=maechlin@usc.edu
+
+source ~/.bashrc
+python3 make_cvmh_1d_basins_elev_nc_long.py

@@ -21,13 +21,20 @@ min_lon= -120.862
 max_lat= 36.613
 min_lat= 30.956
 max_elev= 4000.0
-min_elev= -50000.0
+min_elev= -15000.0
 
 fout_name = "cvmh_elev_file.txt"
 
-n_lon_steps = int(754)
-n_lat_steps = int(566)
-n_elev_steps = 109
+# Low Res Basins
+n_lon_steps = int(377)
+n_lat_steps = int(283)
+n_elev_steps = int(191)
+
+# Full Resolution
+#n_lon_steps = int(754)
+#n_lat_steps = int(566)
+#n_elev_steps = 109
+
 #lat_size: 0.010012389380531062
 #lon_size: 0.009998671978749485
 #z_steps: 495.0495049504951
@@ -38,7 +45,8 @@ n_elev_steps = 109
 lat_steps = np.linspace(min_lat,max_lat,n_lat_steps)
 lon_steps = np.linspace(min_lon,max_lon,n_lon_steps)
 z_steps = np.linspace(max_elev,min_elev,n_elev_steps)
-#print(z_steps)
+print((z_steps))
+print((n_lon_steps * n_lat_steps * n_elev_steps))
 #sys.exit(0)
 
 n_pts = 0

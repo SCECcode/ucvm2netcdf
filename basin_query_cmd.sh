@@ -1,0 +1,1 @@
+ucvm_query -f /project/scec_608/maechlin/ucvm227/conf/ucvm.conf -m cvmhlabn,cvmhsgbn,cvmhvbn,cvmhsmbn,cvmhsbcbn,cvmhsbbn,cvmhstbn,cvmhrbn,cvmhibbn,1d -c ge < cvmh_elev_file.txt > cvmh_1d_basins_elev_output_mesh.txt

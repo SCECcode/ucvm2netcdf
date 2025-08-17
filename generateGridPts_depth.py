@@ -21,13 +21,18 @@ min_lon= -120.862
 max_lat= 36.613
 min_lat= 30.956
 max_depth = 0.0
-min_depth = 54000.0
+min_depth = 19000.0
+#min_depth = 54000.0
 
 fout_name = "socal_depth_file.txt"
 
-n_lon_steps = int(754)
-n_lat_steps = int(566)
-n_depth_steps = 109
+
+n_lon_steps = int(377)
+n_lat_steps = int(282)
+n_depth_steps = int(39)
+#n_lon_steps = int(754)
+#n_lat_steps = int(566)
+#n_depth_steps = 109
 #lat_size: 0.010012389380531062
 #lon_size: 0.009998671978749485
 #z_steps: 495.0495049504951
@@ -38,7 +43,8 @@ n_depth_steps = 109
 lat_steps = np.linspace(min_lat,max_lat,n_lat_steps)
 lon_steps = np.linspace(min_lon,max_lon,n_lon_steps)
 z_steps = np.linspace(max_depth,min_depth,n_depth_steps)
-#print(z_steps)
+print(z_steps)
+print(n_lon_steps * n_lat_steps * n_depth_steps)
 #sys.exit(0)
 
 n_pts = 0

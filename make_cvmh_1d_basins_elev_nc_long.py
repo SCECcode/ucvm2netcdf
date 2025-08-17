@@ -73,11 +73,11 @@ def read_grid(grd_name,lat_steps,lon_steps,z_steps,lat_size,lon_size,z_size):
     # Define the Dataset global attributes
     #
 
-    dataset.title = "SCEC Community Velocity Model 4.26 (CVM-S4.26)"
-    dataset.id = "SCEC_CVM_S4_26"
-    dataset.summary = "SCEC CVM-S4.26 is a 3D structural velocity model for the southern California crust and upper mantle. This represents the results after a 26th tomographic iteration of a CVM-S4 starting model."
-    dataset.reference = "Lee et al. (2014b)"
-    dataset.references = " https://doi.org/10.1002/2014JB011346"
+    dataset.title = "Community Velocity Model - Harvard (CVM-H) Basins - v22.4"
+    dataset.id = "SCEC_CVM_H_Basins_v22_4"
+    dataset.summary = "CVM-H Basins v22.4 is a 3D structural velocity model for the southern California crust and upper mantle. CVM-H v15.1 is comprised of detailed basin velocity descriptions based on tens of thousands of direct velocity (Vp, Vs) measurements and incorporates the locations and displacement of major fault zones that influence basin structure. These basin descriptions were used to developed tomographic models of crust and upper mantle velocity and density structure, which were subsequently iterated and improved using 3D waveform adjoint tomography."
+    dataset.reference = "Shaw et al. (2015)"
+    dataset.references = "https://doi.org/10.1016/j.epsl.2015.01.016"
     dataset.keywords = "seismic, shear wave, s wave, p wave, density, elastic waveform, tomography"
     dataset.Conventions = "CF-1.6"
     dataset.Metadata_Conventions = "Unidata Dataset Discovery v1.0"
@@ -85,11 +85,11 @@ def read_grid(grd_name,lat_steps,lon_steps,z_steps,lat_size,lon_size,z_size):
     dataset.creator_url = "https://www.scec.org/research/ucvm"
     dataset.creator_email = "maechlin@usc.edu"
     dataset.institution = "Southern California Earthquake Center (SCEC)"
-    dataset.acknowledgment = "CVM-S4.26 was developed by En-Jui Lee, Po Chen, and Thomas H. Jordan"
+    dataset.acknowledgment = "CVM-H v15.1 model development was lead by Department of Earth and Planetary Sciences, Harvard University"
     dataset.license = "These data may be redistributed and used without restriction."
-    dataset.history = "CVM-S4.26 was released 2014-06-15. NetCDF version created " + time.ctime(time.time())
-    dataset.comment = "netCDF model extracted from CVM-S4.26 using UCVM and converted to netCDF by SCEC. Model was extracted without a Ely-Jordan GTL. The CVM-S4.26 model was tiled with a modified Hadley-Kanamori model 1D background model."
-    dataset.source = 'SCEC CVM-S4.26 NetCDF file'
+    dataset.history = "CVM-H v15.1 model released 2015-01-15. NetCDF version created " + time.ctime(time.time())
+    dataset.comment = "netCDF model extracted from CVM-H using UCVM and converted to netCDF by SCEC. CVM-H flags setting used are: cvmh_param=USE_1D_BKG,True and cvmh_param=USE_GTL,False"
+    dataset.source = 'SCEC CVM-H v15.1 NetCDF file'
 
     dataset.geospatial_lat_min = 30.95
     dataset.geospatial_lat_max = 36.613
@@ -103,7 +103,7 @@ def read_grid(grd_name,lat_steps,lon_steps,z_steps,lat_size,lon_size,z_size):
     dataset.geospatial_vertical_max = 4.0
     dataset.geospatial_vertical_units = "km"
     dataset.geospatial_vertical_resolution = z_size
-    dataset.geospatial_vertical_positive = "down"
+    dataset.geospatial_vertical_positive = "up"
 
     # Variabgle Attributes
     lats.units = 'degrees_north'
@@ -115,8 +115,8 @@ def read_grid(grd_name,lat_steps,lon_steps,z_steps,lat_size,lon_size,z_size):
     lons.long_name = 'Longitude; positive east'
 
     deps.units = 'km'
-    deps.positive = 'down'
-    deps.long_name = 'depth below ground level (bgl)'
+    deps.positive = 'up'
+    deps.long_name = 'depth below sea level (bsl)'
 
     #
     #
@@ -203,7 +203,7 @@ def read_grid(grd_name,lat_steps,lon_steps,z_steps,lat_size,lon_size,z_size):
                     rho_value = (float(myelems[5]))
                     rho[idlats, idlons, iddp] = rho_value
 
-    print("writing new netcdf file")
+    print("writing new netcdffile")
     dataset.close()
 
     # Notes on the formation of netcdf file format indicating the order of the variables.
@@ -232,7 +232,7 @@ if __name__ == "__main__":
     #
     # Define the mesh file to create a netcdf file
     # the output netcdf file will have the name of the mesh file, but with a .nc extension
-    mesh_file_name = "/Users/maechlin/ucvm_docker/ucvm_v21_10/target/cvms5_1d_depth_socal.txt"
+    mesh_file_name = "/project/scec_608/maechlin/netcdf/ucvm2netcdf/cvmh_1d_basins_elev_output_mesh_long.txt"
     #
     # Define the dimensions of the region. These are from the CVM-H LR Model
     #
@@ -245,14 +245,20 @@ if __name__ == "__main__":
     min_lon = -120.862
     max_lat = 36.613
     min_lat = 30.956
-    min_z = -50.0
+    min_z = -15.0
+    #  min_z = -15.0
     max_z = 4.0
+
+    # Low res Basin values 
+    n_lon_steps = int(377)
+    n_lat_steps = int(283)
+    n_z_steps = int(191)
     #
     # Select a number of points in the mesh in x, y, and z dimensions
     # These numbers were from estimates of the CVM-H LR in km (x,y) and 0.5km in z
-    n_lon_steps = int(754)
-    n_lat_steps = int(566)
-    n_z_steps = int(109)
+    #n_lon_steps = int(754)
+    #n_lat_steps = int(566)
+    #n_z_steps = int(109)
 
     #
     # This divides the dimension into even spaces, based on the n-steps
